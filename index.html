@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Nota Fiscal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <aside class="sidebar">
+        <h1>Nota Fiscal</h1>
+        <button onclick="showScreen('cadastrarNF')">Cadastrar NF</button>
+        <button onclick="showScreen('pesquisarNF')">Pesquisar NF</button>
+        <button onclick="showScreen('editarNF')">Editar NF</button>
+        <button onclick="showScreen('excluirNF')">Excluir NF</button>
+        <button onclick="showScreen('imprimirNF')">Imprimir NFs</button>
+        <button onclick="exitProgram()">Sair</button>
+    </aside>
+
+    <main class="content">
+        <h2>Bem-vindo ao Gerenciador de Nota Fiscal</h2>
+        <p>Selecione uma opção no menu para começar.</p>
+    </main>
+
+    <!-- Tela de Cadastrar NF -->
+    <div id="cadastrarNF" class="modal hidden">
+        <div class="modal-content">
+            <h2>Cadastrar Nota Fiscal</h2>
+            <label>Número do Registro (automático): <span id="registroNumero">1</span></label><br>
+            <label>Data do Cadastro: <input type="text" id="dataCadastro" disabled></label><br>
+            <label>Número da NF: <input type="text" id="numeroNF" required></label><br>
+            <label>Número da Caixa Arquivo: <input type="text" id="numeroCaixa" required></label><br>
+            <div class="button-row">
+                <button onclick="navigateNF('prev')">⬅️</button>
+                <button onclick="saveNF()">Salvar</button>
+                <button onclick="navigateNF('next')">➡️</button>
+                <button onclick="closeModal('cadastrarNF')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Pesquisar NF -->
+    <div id="pesquisarNF" class="modal hidden">
+        <div class="modal-content">
+            <h2>Pesquisar Notas Fiscais</h2>
+            <label>Digite os números das NFs separados por vírgula:</label>
+            <input type="text" id="pesquisaNF" placeholder="Ex: 123, 456, 789">
+            <div class="button-row">
+                <button onclick="searchNF()">Pesquisar</button>
+                <button onclick="showAllNFs()">Exibir Todas as Notas</button>
+                <button onclick="closeModal('pesquisarNF')">Fechar</button>
+            </div>
+            <div id="resultadoPesquisa" class="resultado-pesquisa"></div>
+        </div>
+    </div>
+
+    <!-- Tela de Editar NF -->
+    <div id="editarNF" class="modal hidden">
+        <div class="modal-content">
+            <h2>Editar Nota Fiscal</h2>
+            <label>Digite o número da NF para buscar:</label>
+            <input type="text" id="editarPesquisaNF" placeholder="Digite o número da NF">
+            <div id="editarResultado">
+                <label>Número da NF: <input type="text" id="editarNumeroNF"></label><br>
+                <label>Número da Caixa Arquivo: <input type="text" id="editarNumeroCaixa"></label><br>
+            </div>
+            <div class="button-row">
+                <button onclick="searchNFForEdit()">Buscar</button>
+                <button onclick="updateNF()">Salvar Alterações</button>
+                <button onclick="closeModal('editarNF')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Excluir NF -->
+    <div id="excluirNF" class="modal hidden">
+        <div class="modal-content">
+            <h2>Excluir Nota Fiscal</h2>
+            <div id="excluirLista" class="resultado-pesquisa"></div>
+            <div class="button-row">
+                <button onclick="closeModal('excluirNF')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Imprimir NF -->
+    <div id="imprimirNF" class="modal hidden">
+        <div class="modal-content">
+            <h2>Imprimir Notas Fiscais</h2>
+            <p>Selecione as notas fiscais para impressão em PDF:</p>
+            <div id="imprimirLista" class="resultado-pesquisa"></div>
+            <div class="button-row">
+                <button onclick="printSelectedNFs()">Imprimir Selecionadas</button>
+                <button onclick="exportToTxt()">Exportar Tudo para .txt</button>
+                <button onclick="closeModal('imprimirNF')">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
