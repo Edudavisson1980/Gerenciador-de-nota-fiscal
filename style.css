@@ -4,7 +4,6 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     background-color: #e0f7e0; /* fundo verde claro */
     height: 100vh;
@@ -62,11 +61,13 @@ body {
     align-items: center;
     justify-content: center;
     color: #333;
+    text-align: center;
 }
 
-.content h2 {
+.welcome-title {
     font-size: 28px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .content p {
