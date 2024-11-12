@@ -191,6 +191,37 @@ function exportToTxt() {
     link.click();
 }
 
+// Função para importar dados de um arquivo .txt
+function importFromTxt(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const content = e.target.result;
+        const lines = content.split("\n").filter(line => line.trim() !== "");
+
+        nfData = []; // Limpa dados atuais
+        for (const line of lines.slice(1)) { // Ignora a primeira linha
+            const parts = line.match(/NF:\s(\d+),\sCaixa:\s([A-Za-z0-9]+)/);
+            if (parts) {
+                const [ , numeroNF, numeroCaixa ] = parts;
+                const newNF = {
+                    registro: nfData.length + 1,
+                    data: new Date().toLocaleDateString(),
+                    numeroNF: numeroNF.trim(),
+                    numeroCaixa: numeroCaixa.trim()
+                };
+                nfData.push(newNF);
+            }
+        }
+        alert("Dados importados com sucesso!");
+        updateRegistroNumero();
+    };
+    reader.readAsText(file);
+}
+
+
 function exitProgram() {
     window.close(); // Fecha a janela sem exibir aviso
 }

@@ -95,11 +95,15 @@
             <div class="button-row">
                 <button onclick="printSelectedNFs()">Imprimir Selecionadas</button>
                 <button onclick="exportToTxt()">Exportar Tudo para .txt</button>
+                <!-- Novo botão de Importar arquivo .txt -->
+                <input type="file" id="importTxtFile" accept=".txt" style="display:none;" onchange="importFromTxt(event)">
+                <button onclick="document.getElementById('importTxtFile').click()">Importar arquivo .txt</button>
                 <button onclick="closeModal('imprimirNF')">Fechar</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Rodapé -->
 <footer class="footer">
