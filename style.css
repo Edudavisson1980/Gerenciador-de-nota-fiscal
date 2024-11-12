@@ -150,11 +150,17 @@ body {
     text-align: left;
 }
 
-.checkbox {
+.resultado-pesquisa .checkbox {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 5px 0;
+    gap: 10px;
+}
+
+.resultado-pesquisa .checkbox span {
+    display: inline-block;
+    width: calc(100% - 40px);
 }
 
 /* Rodapé */
